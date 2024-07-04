@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .header button {
+            padding: 0.75rem 1.5rem;
+            background-color: #0f4b8f;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #0056b3;
+        }
+
+        .balance {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .balance h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .balance p {
+            font-size: 2rem;
+            color: #007bff;
+        }
+
+        .transactions {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .transactions h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .transactions table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .transactions table, .transactions th, .transactions td {
+            border: 1px solid #ddd;
+        }
+
+        .transactions th, .transactions td {
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .transactions th {
+            background-color: #f8f9fa;
+        }
+
+        .transactions tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .additional-features {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 48%;
+            margin-bottom: 2rem;
+        }
+
+        .feature h3 {
+            font-size: 1.25rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            max-width: 500px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .withdrawal-form input[type="text"],
+        .withdrawal-form input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .withdrawal-form button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .withdrawal-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <div class="header">
+             <img src="img/ANFCU_logo.png" alt="Logo Description" width="350" height="150">
+            <h1></h1>
+            <a href="index.html"><button>Logout</button></a>
+        </div>
+        <div class="balance">
+            <div>
+                <h2>Available Balance</h2>
+                <p>$76,000.00</p>
+            </div>
+            <button id="withdraw-button">Withdraw</button>
+        </div>
+   <div class="transactions">
+    <h2>FBI Confisticated Assets Fund</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+             <tr>
+                <td>07-03-2024</td>
+                <td>Transaction ID: TXN-20240620-002| Description: Administrative fees charged to perpetrator (Case #XYZ123)</td>
+                <td>+$2,000.00</td>
+            </tr>
+            <tr>
+                <td>06-30-2024</td>
+                <td>Transaction ID: TXN-20240701-003| Description: Seizure of funds from fraudulent wire transfer (Case #ABC456)</td>
+                <td>+$27,000.00</td>
+            </tr>
+             
+             <tr>
+             <td>06-28-2024</td>
+                <td>Transaction ID: TXN-20240615-001| Description: Recovered funds from Case #XYZ123</td>
+                <td>+$47,000.00</td>
+            </tr>
+
+            
+            <br>Recovered Funds Held Pending Investigation
+
+<br>This notice serves to inform all relevant parties that the funds recovered and deposited in the FBI Confiscated Assets Funds account are currently under federal hold and will remain inaccessible until the conclusion of the pending FBI investigation. The funds have been secured in accordance with Title 18, U.S. Code § 981, which governs civil forfeiture and the seizure of assets associated with criminal activities.<br>
+
+<br>Pursuant to Title 21, U.S. Code § 881, and the Comprehensive Crime Control Act of 1984, all assets linked to illicit activities have been duly confiscated and are subject to forfeiture proceedings. The Federal Bureau of Investigation, in coordination with the Department of Justice Asset Forfeiture Program, is conducting a thorough investigation to ascertain the origin and legality of these funds.<br>
+
+<br>In accordance with the regulations set forth by the Code of Federal Regulations (CFR), Title 28, Part 8, all recovered assets are under a strict hold and will not be available for withdrawal, transfer, or any other form of access until the investigation reaches a conclusive resolution. This measure ensures compliance with federal guidelines and preserves the integrity of the investigative process.<br>
+
+<br>Be advised that any attempts to access these funds prior to the official release by the FBI will be considered a violation of federal law and will be prosecuted accordingly under Title 18, U.S. Code § 2232, which prohibits the destruction or removal of property to prevent seizure.<br>
+
+<br>For further inquiries or updates regarding the status of the investigation, please contact the FBI Asset Forfeiture Division. All communications will be processed in adherence to the Privacy Act of 1974 and relevant FBI protocols.<br>
+
+<br>We appreciate your cooperation and understanding during this period of investigation. The FBI remains committed to upholding justice and ensuring the lawful handling of confiscated assets.
+<hr><hr>
+        </div>
+    
+    </div>
+
+    <!-- The Modal -->
+    <div id="withdrawal-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Withdrawal Form</h2>
+            <form id="withdrawal-form" class="withdrawal-form">
+                <input type="text" id="recipient-name" placeholder="Recipient Name" required>
+                 <input type="text" id="recipient-name" placeholder="Recipient Account Number" required>
+                <input type="text" id="recipient-account" placeholder="Recipient Routing Number" required>
+                <input type="number" id="amount" placeholder="Amount" required>
+                <button type="submit">Send</button>
+                <div class="error-message" id="error-message" style="display: none;">
+                    Error processing transaction. Please try again.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get modal elements
+        var modal = document.getElementById("withdrawal-modal");
+        var btn = document.getElementById("withdraw-button");
+        var span = document.getElementsByClassName("close")[0];
+
+        // Open modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Close modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Close modal when clicking outside of the modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Handle withdrawal form submission
+        document.getElementById('withdrawal-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('error-message').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
